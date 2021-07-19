@@ -1,0 +1,51 @@
+{
+  "name": "Zoo-TwentyOne",
+  "version": "1.0.0",
+  "description": "Card Game Twenty-One",
+  "main": "game.js",
+  "dependencies": {
+    "jest": "^27.0.6"
+  },
+  "devDependencies": {
+    "jest": "^26.6.3",
+    "jest-html-reporter": "^3.3.0",
+    "jest-junit": "^12.0.0"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TrellinXp/Zoo-TwentyOne.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TrellinXp/Zoo-TwentyOne/issues"
+  },
+  "jest": {
+    "reporters": [
+      "default",
+      [
+        "./node_modules/jest-html-reporter",
+        {
+          "pageTitle": "Twenty One Solution",
+          "outputPath": "twentyOneSolution.html",
+          "includeFailureMsg": true,
+          "includeConsoleLog": true
+        }
+      ]
+    ]
+  },
+  "jest-junit": {
+    "suiteNameTemplate": "{filepath}",
+    "classNameTemplate": "{classname}",
+    "titleTemplate": "{title}"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "none"
+  },
+  "homepage": "https://github.com/TrellinXp/Zoo-TwentyOne#readme"
+}
