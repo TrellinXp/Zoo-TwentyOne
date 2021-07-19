@@ -5,9 +5,44 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zoo 21</title>
-    <script src="game.js"></script>
+    <img src="img/logo.png"></img>
+    <script  type="text/javascript" src="src/game.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Zoo 21</h1>
+    <div id="player-cards" class="player-cards">
+        <h3 class="cards-headline">Player Cards</h3> 
+        <div id="dealt-cards" class='dealt-cards'>
+        </div>
+    </div>
+    <div id="player-cards" class="player-cards">
+        <h3 class="cards-headline">Oponent Cards</h3> 
+        <div id="oponent-cards" class='dealt-cards'>
+        </div>
+    </div>
+
+    <div class="player-points">
+        <div>Player Points:</div>
+        <div id="player-points" class="pointsnumber"></div>
+    </div>
+
+    <div class="player-points">
+        <div>Oponents Points:</div>
+        <div id="oponents-points" class="pointsnumber"></div>
+    </div>
+
+    <div class="actions">
+        <button id="getOneMoreCard" class="button" onclick="getOneMoreCard()">Get One more Card</button>
+        <button id='stopGettingCards' class="button">Stop Getting Cards</button>
+    </div>
+
+    <div>
+        <div id="result"></div>
+    </div>
+
+    <div id="card" class="card">
+        <div class="image" id="image"><img src="/img/fox.png"><img></div> 
+    </div>
+
 </body>
 </html>

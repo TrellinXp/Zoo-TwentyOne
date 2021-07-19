@@ -1,0 +1,70 @@
+.actions {
+    width: 20vw;
+    display: flex;
+    flex-direction: column;
+    margin-top: 2vh;
+}
+
+.button {
+    margin-top: 3vh;
+    height: 8vh;
+    background-color: white;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.player-cards {
+    display: flex;
+    flex-direction: column;
+    height: 55vh;
+    margin-top: 2vh;
+    border: 1px solid black;
+}
+
+.card {
+    height: 40vh;
+    width: 15vw;
+    margin-left: 2vw;
+    border: 2px solid black;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    visibility: collapse;
+}
+
+.number {
+    height: 30%;
+    width: 6vw;
+    margin-top: 2.5vh;
+    margin-left: 10%;
+    padding-left: 35%;
+    padding-top: 10%;
+    font-size:60px;
+    font-weight: bold;
+    color: blue;
+}
+
+.dealt-cards {
+    display: flex;
+}
+
+.cards-headline {
+    margin-left: 2vw;
+}
+
+.player-points {
+    display: flex;
+    flex-direction: row;
+}
+
+.pointsnumber {
+    margin-left: 6vw;
+}
+
+.image {
+    height: 200px;
+    width: 200px;
+    margin-left: 2vw;
+    margin-right: 2vw;
+    margin-top: 1vh;
+}
