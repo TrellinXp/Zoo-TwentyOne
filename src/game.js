@@ -1,7 +1,7 @@
 class TwentyOne {
     constructor() {
         this.cards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10 ,10, 11]; 
-        this.images = ['fox', 'snake', 'mouse', 'owl', 'lion'];
+        this.images = ['fox', 'snake', 'mouse', 'owl', 'coala', 'duck', 'bear', 'hippo', 'lion', 'kangaroo'];
         this.addButtonListeners();
         this.playerPoints = 0;
         this.oponentsPoints = 0;
@@ -34,7 +34,7 @@ class TwentyOne {
 
             self.isGameFinished = true;
             while(self.oponentsPoints <= self.playerPoints && self.oponentsPoints < 21) {
-                self.oponentGetCards();
+                self.getOneOponentCard();
             }
             self.printResult(self);
        };
@@ -89,26 +89,24 @@ class TwentyOne {
         return randomNumber;
     }
 
+
+    //Refactor getOneMoreCard and OponentGetCards()
     getOneMoreCard() {
         let randomCard = this.getRandomCard();
         this.playerPoints += randomCard;
         let playerCards = document.getElementById('dealt-cards');
         let newCard = this.duplicateCard(randomCard);
         newCard.classList.add('card');
-        newCard.style.visibility = 'visible';
+        newCard.style.display = 'block';
         playerCards.appendChild(newCard);
         this.playerCards.push(newCard);
 
         let playerPoints = document.getElementById('player-points');
         playerPoints.innerHTML = this.playerPoints;
         this.playerCardCounter++;
-        let divs = newCard.getElementsByTagName("div");
-        console.log(newCard);
-        let image = divs[0];
-        console.log(this.images[0]);
-
-        let imageUrl = 'url(/img/'+this.getImage(randomCard)+'.png)';
-        image.style.backgroundImage = imageUrl; 
+        let img = newCard.getElementsByTagName("img")[0];
+        let imageUrl = '/img/'+this.getImage(randomCard)+'.png';
+        img.src = imageUrl; 
 
         this.printResult(this);
         return this.getRandomCard();
@@ -119,25 +117,24 @@ class TwentyOne {
             case 2: return this.images[0];
             case 3: return this.images[1];
             case 4: return this.images[2];
-            case 5: 
-            case 6:
-            case 7:
-            case 8:
-            case 9:
-            case 10: return this.images[4];
-            case 11:
-            default: return this.images[2];
+            case 5: return this.images[3];
+            case 6: return this.images[4];
+            case 7: return this.images[5];
+            case 8: return this.images[6];
+            case 9: return this.images[7];
+            case 10: return this.images[8];
+            case 11: return this.images[9];
         }
     }
 
-    oponentGetCards() {
+    getOneOponentCard() {
         let randomCard = this.getRandomCard();
         this.oponentsPoints += randomCard;
         let oponentsCards = document.getElementById('oponent-cards');
-        let div = this.duplicateCard(randomCard);
-        div.classList.add('card');
-        div.style.visibility = 'visible';
-        oponentsCards.appendChild(div);
+        let newCard = this.duplicateCard(randomCard);
+        newCard.classList.add('card');
+        newCard.style.display = 'block';
+        oponentsCards.appendChild(newCard);
 
         let oponentsPoints = document.getElementById('oponents-points');
         oponentsPoints.innerHTML = this.oponentsPoints;
