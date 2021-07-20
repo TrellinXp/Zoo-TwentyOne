@@ -1,7 +1,8 @@
 class TwentyOne {
     constructor() {
         this.cards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10 ,10, 11]; 
-        this.images = ['fox', 'snake', 'mouse', 'owl', 'coala', 'duck', 'bear', 'hippo', 'lion', 'kangaroo'];
+        //this.images = ['fox', 'snake', 'mouse', 'owl', 'coala', 'duck', 'bear', 'hippo', 'lion_cartoon', 'kangaroo'];
+        this.imagesCartoon = ['snake', 'cat', 'flamingo', 'monkey', 'crocodile', 'deer', 'shark', 'whale', 'zebra', 'lion' ];
         this.addButtonListeners();
         this.playerPoints = 0;
         this.oponentsPoints = 0;
@@ -20,7 +21,7 @@ class TwentyOne {
         let button = document.getElementById('getOneMoreCard');
         button.onclick = function() {
             if(!self.isGameFinished) {
-                self.getOneMoreCard();
+                self.getOneMoreCard('player');
                 if(self.playerPoints > 21) {
                     self.isGameFinished = true;
                 }
@@ -31,7 +32,6 @@ class TwentyOne {
     addStopButton(self) {
         let stop = document.getElementById('stopGettingCards');
         stop.onclick = function() {
-
             self.isGameFinished = true;
             while(self.oponentsPoints <= self.playerPoints && self.oponentsPoints < 21) {
                 self.getOneOponentCard();
@@ -90,40 +90,49 @@ class TwentyOne {
     }
 
 
+    getImage(cardValue) {
+        switch(cardValue) {
+            case 2: return this.imagesCartoon [0];
+            case 3: return this.imagesCartoon[1];
+            case 4: return this.imagesCartoon[2];
+            case 5: return this.imagesCartoon[3];
+            case 6: return this.imagesCartoon[4];
+            case 7: return this.imagesCartoon[5];
+            case 8: return this.imagesCartoon[6];
+            case 9: return this.imagesCartoon[7];
+            case 10: return this.imagesCartoon[8];
+            case 11: return this.imagesCartoon[9];
+        }
+    }
+
+    
     //Refactor getOneMoreCard and OponentGetCards()
-    getOneMoreCard() {
+    getOneMoreCard(player) {
         let randomCard = this.getRandomCard();
         this.playerPoints += randomCard;
-        let playerCards = document.getElementById('dealt-cards');
+        let cards = document.getElementById('oponent-cards');
+        if(player === 'player') {
+            cards = document.getElementById('dealt-cards');
+        } 
         let newCard = this.duplicateCard(randomCard);
         newCard.classList.add('card');
         newCard.style.display = 'block';
-        playerCards.appendChild(newCard);
+        cards.appendChild(newCard);
         this.playerCards.push(newCard);
 
         let playerPoints = document.getElementById('player-points');
         playerPoints.innerHTML = this.playerPoints;
         this.playerCardCounter++;
         let img = newCard.getElementsByTagName("img")[0];
-        let imageUrl = '/img/'+this.getImage(randomCard)+'.png';
+        let imageUrl = '/img/cartoon/'+this.getImage(randomCard)+'.png';
         img.src = imageUrl; 
 
         this.printResult(this);
-        return this.getRandomCard();
-    }
-
-    getImage(cardValue) {
-        switch(cardValue) {
-            case 2: return this.images[0];
-            case 3: return this.images[1];
-            case 4: return this.images[2];
-            case 5: return this.images[3];
-            case 6: return this.images[4];
-            case 7: return this.images[5];
-            case 8: return this.images[6];
-            case 9: return this.images[7];
-            case 10: return this.images[8];
-            case 11: return this.images[9];
+        
+        if(player === 'player') {
+            return this.getRandomCard();
+        } else {
+            return this.getRandomCard();
         }
     }
 
@@ -144,7 +153,6 @@ class TwentyOne {
     startNewGame(self) {    
         let playerCards = document.getElementById('dealt-cards');
         playerCards.innerHTML = '';
-
         let oponentsCards = document.getElementById('oponent-cards');
         oponentsCards.innerHTML = '';
         self.isGameFinished = false;
