@@ -1,48 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zoo 21</title>
-    <img src="img/logo.png"></img>
-    <script  type="text/javascript" src="src/game.js"></script>
+    <div class="logo-container">
+        <img class="logo" src="img/logo.png"></img>
+    </div>
+    <script type="text/javascript" src="src/game.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <div id="player-cards" class="player-cards">
-        <h3 class="cards-headline">Player Cards</h3> 
-        <div id="dealt-cards" class='dealt-cards'>
+    <div class="content">
+        <div class="card-section">
+            <div id="player-cards" class="player-cards">
+                <h3 class="cards-headline">Player Cards</h3>
+                <div id="dealt-cards" class='dealt-cards'>
+                </div>
+            </div>
+            <div id="player-cards" class="player-cards">
+                <h3 class="cards-headline">Oponent Cards</h3>
+                <div id="oponent-cards" class='dealt-cards'>
+                </div>
+            </div>
+        </div>
+
+        <div class="statistics">
+                <div class="actions">
+                    <button id="getOneMoreCard" class="button" onclick="getOneMoreCard()">Get One more Card</button>
+                    <button id='stopGettingCards' class="button">Stop Getting Cards</button>
+                    <button id='newGame' class="button">Start new Game</button>
+                </div>
+
+                <div class="points">
+                    <div class="player-points">
+                        <div class="player-text">Player Points:</div>
+                        <div class="points-value" id="player-points">0</div>
+                    </div>
+
+                    <div class="player-points">
+                        <div class="player-text">Oponents Points:</div>
+                        <div id="oponents-points" class="points-value">0</div>
+                    </div>
+                </div>   
+                
+                <div>
+                    <div class="result" id="result"></div>
+                </div>         
         </div>
     </div>
-    <div id="player-cards" class="player-cards">
-        <h3 class="cards-headline">Oponent Cards</h3> 
-        <div id="oponent-cards" class='dealt-cards'>
-        </div>
-    </div>
 
-    <div class="player-points">
-        <div>Player Points:</div>
-        <div id="player-points" class="pointsnumber"></div>
+    <div class="attribution">
+        <a href="https://de.freepik.com/vektoren/hintergrund" class="attribution">Hintergrund Vektor erstellt von brgfx - de.freepik.com</a>
     </div>
-
-    <div class="player-points">
-        <div>Oponents Points:</div>
-        <div id="oponents-points" class="pointsnumber"></div>
-    </div>
-
-    <div class="actions">
-        <button id="getOneMoreCard" class="button" onclick="getOneMoreCard()">Get One more Card</button>
-        <button id='stopGettingCards' class="button">Stop Getting Cards</button>
-    </div>
-
-    <div>
-        <div id="result"></div>
-    </div>
-
     <div id="card" class="card">
-        <div class="image" id="image"><img src="/img/fox.png"><img></div> 
+        <div class="image" id="image"></div>
     </div>
 
 </body>
+
 </html>
