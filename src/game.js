@@ -189,7 +189,6 @@ class TwentyOne {
         let sum = 0;
         for(var count = 0; count < pointsArray.length; count++){
             sum = sum + pointsArray[count];
-            console.log(sum);
         }
         return sum;
     }
@@ -198,19 +197,15 @@ class TwentyOne {
         let sum = 0;
         for(var count = 0; count < pointsArray.length; count++){
             sum = sum + pointsArray[count];
-            console.log(sum);
         }
         return sum;
     }
 
 }
 
-
 window.addEventListener('load', function () {
     new TwentyOne();
 });
-
-
 
 if (typeof module !== 'undefined')  module.exports = TwentyOne;
 
