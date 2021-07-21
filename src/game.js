@@ -8,6 +8,8 @@ class TwentyOne {
         this.playerCardCounter = 0;
         this.playerCards = [];
         this.isGameFinished = false;
+        this.gamesWon = 0;
+        this.gamesLost = 0;
     }
 
     addButtonListeners() {
@@ -48,29 +50,39 @@ class TwentyOne {
 
     printResult(self) {
         if(self.playerPoints > 21) {
-            var result = document.getElementById('result');
             document.getElementById('result').innerHTML = "You loose because you have more than 21";
+            self.gamesLost++;
+            console.log(document.getElementById('games-lost'));
+            document.getElementById('games-lost').innerHTML = self.gamesLost;
             return;
         }
 
         if(self.isGameFinished) {
             if(self.oponentsPoints > 21) {
                 document.getElementById('result').innerHTML = "You win because your oponent has more than 21";
+                self.gamesWon++;
+                document.getElementById('games-won').innerHTML = self.gamesWon;
                 return;
             }
 
             if(self.oponentsPoints > self.playerPoints) {
                 document.getElementById('result').innerHTML = "You loose because your oponent has more points than you";
+                self.gamesLost++;
+                document.getElementById('games-lost').innerHTML = self.gamesLost;
                 return;
             }
 
             if(self.oponentsPoints < self.playerPoints) {
                 document.getElementById('result').innerHTML = "You win because your oponent has more points than you";
+                self.gamesWon++;
+                document.getElementById('games-won').innerHTML = self.gamesWon;
                 return;
             }
 
             if(self.oponentsPoints > self.playerPoints) {
                 document.getElementById('result').innerHTML = "You loose Your oponent has more points than you";
+                self.gamesLost++;
+                document.getElementById('games-lost').innerHTML = sel.gamesLost;
                 return;
             }
         }
