@@ -1,6 +1,6 @@
 class TwentyOne {
     constructor() {
-        this.cards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10 ,10, 11]; 
+        this.cards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11];
         this.imagesCartoon = ['snake', 'cat', 'flamingo', 'monkey', 'crocodile', 'deer', 'shark', 'whale', 'lion', 'zebra'];
         this.addButtonListeners();
         this.playerPoints = 0;
@@ -12,18 +12,19 @@ class TwentyOne {
     }
 
     addButtonListeners() {
-       this.addGetOneMoreCardButton(this);
-       this.addStopButton(this);
-       this.addNewGameButton(this);
+        this.addGetOneMoreCardButton(this);
+        this.addStopButton(this);
+        this.addNewGameButton(this);
     }
 
     addGetOneMoreCardButton(self) {
         let button = document.getElementById('getOneMoreCard');
-        button.onclick = function() {
-            if(!self.isGameFinished) {
+        button.onclick = function () {
+            if (!self.isGameFinished) {
                 self.getOneMoreCard('player');
-                if(self.playerPoints > 21) {
+                if (self.playerPoints > 21) {
                     self.isGameFinished = true;
+                    self.printResult(self);
                 }
             }
         };
@@ -31,58 +32,63 @@ class TwentyOne {
 
     addStopButton(self) {
         let stop = document.getElementById('stopGettingCards');
-        stop.onclick = function() {
-            self.isGameFinished = true;
-            while(self.oponentsPoints <= self.playerPoints && self.oponentsPoints < 21) {
-                self.getOneOponentCard();
+        stop.onclick = function () {
+            if (!self.isGameFinished) {
+                self.isGameFinished = true;
+                while (self.oponentsPoints <= self.playerPoints && self.oponentsPoints < 21) {
+                    self.getOneMoreCard('oponent');
+                }
+                self.printResult(self);
             }
-            self.printResult(self);
-       };
+        };
     }
 
     addNewGameButton(self) {
         let newGame = document.getElementById('newGame');
-        newGame.onclick = function() {
+        newGame.onclick = function () {
             self.startNewGame(self);
         };
     }
 
     printResult(self) {
-        if(self.playerPoints > 21) {
-            self.gamesLost++;
+        self.getGameResults();
+        if (self.playerPoints > 21) {
             document.getElementById('result').innerHTML = "You loose because you have more than 21";
             document.getElementById('result').style.backgroundColor = "red";
             document.getElementById('games-lost').innerHTML = self.gamesLost;
             return;
         }
 
-        if(self.isGameFinished) {
-            if(self.oponentsPoints > 21) {
-                self.gamesWon++;
+        if (self.isGameFinished) {
+            if (self.playerPoints > 21) {
+                document.getElementById('result').innerHTML = "You loose because you have more than 21";
+                document.getElementById('result').style.backgroundColor = "green";
+                document.getElementById('games-won').innerHTML = self.gamesWon;
+                return;
+            }
+
+            if (self.oponentsPoints > 21) {
                 document.getElementById('result').innerHTML = "You win because your oponent has more than 21";
                 document.getElementById('result').style.backgroundColor = "green";
                 document.getElementById('games-won').innerHTML = self.gamesWon;
                 return;
             }
 
-            if(self.oponentsPoints > self.playerPoints) {
-                self.gamesLost++;
+            if (self.oponentsPoints > self.playerPoints) {
                 document.getElementById('result').innerHTML = "You loose because your oponent has more points than you";
                 document.getElementById('result').style.backgroundColor = "red";
                 document.getElementById('games-lost').innerHTML = self.gamesLost;
                 return;
             }
 
-            if(self.oponentsPoints < self.playerPoints) {
-                self.gamesWon++;
+            if (self.oponentsPoints < self.playerPoints) {
                 document.getElementById('result').innerHTML = "You win because your oponent has more points than you";
                 document.getElementById('result').style.backgroundColor = "green";
                 document.getElementById('games-won').innerHTML = self.gamesWon;
                 return;
             }
 
-            if(self.oponentsPoints > self.playerPoints) {
-                self.gamesLost++;
+            if (self.oponentsPoints > self.playerPoints) {
                 document.getElementById('result').innerHTML = "You loose Your oponent has more points than you";
                 document.getElementById('result').style.backgroundColor = "red";
                 document.getElementById('games-lost').innerHTML = sel.gamesLost;
@@ -91,9 +97,31 @@ class TwentyOne {
         }
     }
 
-    getRandomCard() {  
-        let randomNumber = this.getRandomNumber(0, this.cards.length-1);
-        return this.cards[randomNumber]; 
+    getGameResults() {
+        if (this.oponentsPoints > 21) {
+            this.gamesWon++;
+            return;
+        }
+
+        if(this.playerPoints > 21) {
+            this.gamesLost++;
+            return;
+        }
+
+        if (this.oponentsPoints > this.playerPoints) {
+            this.gamesLost++;
+            return;
+        }
+
+        if (this.oponentsPoints < this.playerPoints) {
+            this.gamesWon++;
+            return;
+        }
+    }
+
+    getRandomCard() {
+        let randomNumber = this.getRandomNumber(0, this.cards.length - 1);
+        return this.cards[randomNumber];
     }
 
     getRandomNumber(min, max) {
@@ -105,8 +133,8 @@ class TwentyOne {
 
 
     getImage(cardValue) {
-        switch(cardValue) {
-            case 2: return this.imagesCartoon [0];
+        switch (cardValue) {
+            case 2: return this.imagesCartoon[0];
             case 3: return this.imagesCartoon[1];
             case 4: return this.imagesCartoon[2];
             case 5: return this.imagesCartoon[3];
@@ -118,57 +146,44 @@ class TwentyOne {
             case 11: return this.imagesCartoon[9];
         }
     }
-    
-    //Refactor getOneMoreCard and OponentGetCards()
+
     getOneMoreCard(player) {
-        let randomCard = this.getRandomCard();
-        this.playerPoints += randomCard;
-        let cards = document.getElementById('oponent-cards');
-        if(player === 'player') {
-            cards = document.getElementById('dealt-cards');
-        } 
-        let newCard = this.duplicateCard(randomCard);
-        newCard.classList.add('card');
-        newCard.style.display = 'block';
-        cards.appendChild(newCard);
-        this.playerCards.push(newCard);
+        let randomCard = this.getRanomCardWithImage(player);
 
-        let playerPoints = document.getElementById('player-points');
-        playerPoints.innerHTML = this.playerPoints;
-        this.playerCardCounter++;
-        let img = newCard.getElementsByTagName("img")[0];
-        let imageUrl = 'img/'+this.getImage(randomCard)+'.png';
-        img.src = imageUrl; 
-
-        this.printResult(this);
-        
-        if(player === 'player') {
-            return this.getRandomCard();
+        if (player === 'player') {
+            this.playerPoints += randomCard;
+            let playerPoints = document.getElementById('player-points');
+            playerPoints.innerHTML = this.playerPoints;
+            this.playerCardCounter++;
         } else {
-            return this.getRandomCard();
+            this.oponentsPoints += randomCard;
+            let oponentsPoints = document.getElementById('oponents-points');
+            oponentsPoints.innerHTML = this.oponentsPoints;
         }
+        this.getRandomCard();
     }
 
-    getOneOponentCard() {
+    getRanomCardWithImage(player) {
         let randomCard = this.getRandomCard();
-        this.oponentsPoints += randomCard;
-        let oponentsCards = document.getElementById('oponent-cards');
         let newCard = this.duplicateCard(randomCard);
         newCard.classList.add('card');
         newCard.style.display = 'block';
 
         let img = newCard.getElementsByTagName("img")[0];
-        let imageUrl = 'img/'+this.getImage(randomCard)+'.png';
-        img.src = imageUrl; 
+        let imageUrl = 'img/' + this.getImage(randomCard) + '.png';
+        img.src = imageUrl;
 
-        oponentsCards.appendChild(newCard);
+        let cards = document.getElementById('oponent-cards');
+        if (player === 'player') {
+            cards = document.getElementById('dealt-cards');
+        }
 
-        let oponentsPoints = document.getElementById('oponents-points');
-        oponentsPoints.innerHTML = this.oponentsPoints;
-        return this.getRandomCard();
+        cards.appendChild(newCard);
+
+        return randomCard;
     }
 
-    startNewGame(self) {    
+    startNewGame(self) {
         let playerCards = document.getElementById('dealt-cards');
         playerCards.innerHTML = '';
         let oponentsCards = document.getElementById('oponent-cards');
@@ -180,14 +195,14 @@ class TwentyOne {
 
     duplicateCard(randomCard) {
         var original = document.getElementById('card');
-        var clone = original.cloneNode(true); 
+        var clone = original.cloneNode(true);
 
-        clone.id = "card" + this.cardCounter;     
+        clone.id = "card" + this.cardCounter;
         var numberDiv = document.createElement("div");;
         numberDiv.classList.add("number");
         numberDiv.innerHTML = randomCard;
 
-        clone.appendChild(numberDiv);        
+        clone.appendChild(numberDiv);
         return clone;
     }
 
@@ -195,8 +210,8 @@ class TwentyOne {
         let oponentsPoints = document.getElementById('oponents-points');
         let playerPoints = document.getElementById('player-points');
         var result = document.getElementById('result');
-        
-        playerPoints.innerHTML = 0;        
+
+        playerPoints.innerHTML = 0;
         oponentsPoints.innerHTML = 0;
         result.style.backgroundColor = "white";
         result.innerHTML = '';
@@ -211,7 +226,7 @@ class TwentyOne {
 
     getPlayerPoints(pointsArray) {
         let sum = 0;
-        for(var count = 0; count < pointsArray.length; count++){
+        for (var count = 0; count < pointsArray.length; count++) {
             sum = sum + pointsArray[count];
         }
         return sum;
@@ -219,7 +234,7 @@ class TwentyOne {
 
     getDealerPoints(pointsArray) {
         let sum = 0;
-        for(var count = 0; count < pointsArray.length; count++){
+        for (var count = 0; count < pointsArray.length; count++) {
             sum = sum + pointsArray[count];
         }
         return sum;
@@ -231,5 +246,5 @@ window.addEventListener('load', function () {
     new TwentyOne();
 });
 
-if (typeof module !== 'undefined')  module.exports = TwentyOne;
+if (typeof module !== 'undefined') module.exports = TwentyOne;
 
