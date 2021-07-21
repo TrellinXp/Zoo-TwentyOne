@@ -1,7 +1,6 @@
 class TwentyOne {
     constructor() {
         this.cards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10 ,10, 11]; 
-        //this.images = ['fox', 'snake', 'mouse', 'owl', 'coala', 'duck', 'bear', 'hippo', 'lion_cartoon', 'kangaroo'];
         this.imagesCartoon = ['snake', 'cat', 'flamingo', 'monkey', 'crocodile', 'deer', 'shark', 'whale', 'lion', 'zebra'];
         this.addButtonListeners();
         this.playerPoints = 0;
@@ -124,7 +123,7 @@ class TwentyOne {
         playerPoints.innerHTML = this.playerPoints;
         this.playerCardCounter++;
         let img = newCard.getElementsByTagName("img")[0];
-        let imageUrl = '/img/cartoon/'+this.getImage(randomCard)+'.png';
+        let imageUrl = '/img/'+this.getImage(randomCard)+'.png';
         img.src = imageUrl; 
 
         this.printResult(this);
@@ -145,7 +144,7 @@ class TwentyOne {
         newCard.style.display = 'block';
 
         let img = newCard.getElementsByTagName("img")[0];
-        let imageUrl = '/img/cartoon/'+this.getImage(randomCard)+'.png';
+        let imageUrl = '/img/'+this.getImage(randomCard)+'.png';
         img.src = imageUrl; 
 
         oponentsCards.appendChild(newCard);
