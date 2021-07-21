@@ -6,7 +6,6 @@ class TwentyOne {
         this.playerPoints = 0;
         this.oponentsPoints = 0;
         this.playerCardCounter = 0;
-        this.playerCards = [];
         this.isGameFinished = false;
         this.gamesWon = 0;
         this.gamesLost = 0;
@@ -50,38 +49,42 @@ class TwentyOne {
 
     printResult(self) {
         if(self.playerPoints > 21) {
-            document.getElementById('result').innerHTML = "You loose because you have more than 21";
             self.gamesLost++;
-            console.log(document.getElementById('games-lost'));
+            document.getElementById('result').innerHTML = "You loose because you have more than 21";
+            document.getElementById('result').style.backgroundColor = "red";
             document.getElementById('games-lost').innerHTML = self.gamesLost;
             return;
         }
 
         if(self.isGameFinished) {
             if(self.oponentsPoints > 21) {
-                document.getElementById('result').innerHTML = "You win because your oponent has more than 21";
                 self.gamesWon++;
+                document.getElementById('result').innerHTML = "You win because your oponent has more than 21";
+                document.getElementById('result').style.backgroundColor = "green";
                 document.getElementById('games-won').innerHTML = self.gamesWon;
                 return;
             }
 
             if(self.oponentsPoints > self.playerPoints) {
-                document.getElementById('result').innerHTML = "You loose because your oponent has more points than you";
                 self.gamesLost++;
+                document.getElementById('result').innerHTML = "You loose because your oponent has more points than you";
+                document.getElementById('result').style.backgroundColor = "red";
                 document.getElementById('games-lost').innerHTML = self.gamesLost;
                 return;
             }
 
             if(self.oponentsPoints < self.playerPoints) {
-                document.getElementById('result').innerHTML = "You win because your oponent has more points than you";
                 self.gamesWon++;
+                document.getElementById('result').innerHTML = "You win because your oponent has more points than you";
+                document.getElementById('result').style.backgroundColor = "green";
                 document.getElementById('games-won').innerHTML = self.gamesWon;
                 return;
             }
 
             if(self.oponentsPoints > self.playerPoints) {
-                document.getElementById('result').innerHTML = "You loose Your oponent has more points than you";
                 self.gamesLost++;
+                document.getElementById('result').innerHTML = "You loose Your oponent has more points than you";
+                document.getElementById('result').style.backgroundColor = "red";
                 document.getElementById('games-lost').innerHTML = sel.gamesLost;
                 return;
             }
@@ -115,7 +118,6 @@ class TwentyOne {
             case 11: return this.imagesCartoon[9];
         }
     }
-
     
     //Refactor getOneMoreCard and OponentGetCards()
     getOneMoreCard(player) {
@@ -190,12 +192,13 @@ class TwentyOne {
     }
 
     clearResult() {
-        let playerPoints = document.getElementById('player-points');
-        playerPoints.innerHTML = 0;        
         let oponentsPoints = document.getElementById('oponents-points');
-        oponentsPoints.innerHTML = 0;
-
+        let playerPoints = document.getElementById('player-points');
         var result = document.getElementById('result');
+        
+        playerPoints.innerHTML = 0;        
+        oponentsPoints.innerHTML = 0;
+        result.style.backgroundColor = "white";
         result.innerHTML = '';
 
         this.playerPoints = 0;
