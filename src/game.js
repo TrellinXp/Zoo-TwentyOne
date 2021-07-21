@@ -123,7 +123,7 @@ class TwentyOne {
         playerPoints.innerHTML = this.playerPoints;
         this.playerCardCounter++;
         let img = newCard.getElementsByTagName("img")[0];
-        let imageUrl = '/img/'+this.getImage(randomCard)+'.png';
+        let imageUrl = 'img/'+this.getImage(randomCard)+'.png';
         img.src = imageUrl; 
 
         this.printResult(this);
@@ -144,7 +144,7 @@ class TwentyOne {
         newCard.style.display = 'block';
 
         let img = newCard.getElementsByTagName("img")[0];
-        let imageUrl = '/img/'+this.getImage(randomCard)+'.png';
+        let imageUrl = 'img/'+this.getImage(randomCard)+'.png';
         img.src = imageUrl; 
 
         oponentsCards.appendChild(newCard);
