@@ -7,3 +7,7 @@ If both numbers are equal your oponent wins.
 <b>Playable Verion under:</b>
 
 https://trellinxp.github.io/Zoo-TwentyOne/
+
+<b>You can clone the Code to your machine with:</b>
+
+https://github.com/TrellinXp/Zoo-TwentyOne.git
